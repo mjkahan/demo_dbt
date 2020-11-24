@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run a one-line script
-        run: echo Complete
+        run: echo $(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')
