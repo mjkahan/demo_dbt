@@ -16,5 +16,10 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v2
 
-      - name: Run a one-line script
-        run: echo $(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')
+      - name: Identify Models
+        id: model_names
+        run: |
+          echo "::set-output name=models::$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g'))"
+        
+      - name: Deploy Models
+        run: dbt run -m ${{outputs.models};

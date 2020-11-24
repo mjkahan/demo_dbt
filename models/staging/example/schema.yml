@@ -3,7 +3,7 @@ version: 2
 
 models:
     - name: example__my_first_dbt_model
-      description: "A starter dbt model"
+      description: "A starter dbt model description."
       columns:
           - name: id
             description: "The primary key for this table"
