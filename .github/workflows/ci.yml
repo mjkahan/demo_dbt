@@ -19,7 +19,7 @@ jobs:
       - name: Identify Models
         id: model_names
         run: |
-          echo "::set-output name=models::git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g'"
+          echo "::set-output name=models::test_model"
         
       - name: Deploy Models
-        run: dbt run -m ${{steps.model_names.outputs.models}};
+        run: print ${{steps.model_names.outputs.models}};
