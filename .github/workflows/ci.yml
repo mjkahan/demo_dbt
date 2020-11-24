@@ -22,4 +22,4 @@ jobs:
           echo "::set-output name=models::test_model"
         
       - name: Deploy Models
-        run: print ${{steps.model_names.outputs.models}};
+        run: echo ${{ steps.model_names.outputs.models }};
