@@ -6,7 +6,7 @@ snowflake:
       account: ${{ secrets.DBT_ACCOUNT }}
       database: DEMO_DB
       schema: PUBLIC
-      warehouse: compute_wh
+      warehouse: COMPUTE_WH
       role: SYSADMIN
       user: ${{ secrets.DBT_USER }}
       password: ${{ secrets.DBT_PASSWORD }}
