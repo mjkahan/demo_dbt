@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v0.1.0
+      - uses: actions/checkout@v2
 
       - name: dbt-run
         uses: mwhitaker/dbt-action@master
         with:
-          dbt_command: "dbt run --profiles-dir ."
+          dbt_command: "dbt run"
 
       - name: Run a one-line script
         run: Complete
