@@ -16,15 +16,11 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v2
 
-      - name: Set env
-        run: echo "MODELS=$(echo git diff --name-only)" >> $GITHUB_ENV
+      - uses: technote-space/get-diff-action@v4
+        with:
+          PATTERNS: |
+            +*.sql+
 
-      - name: Set env2
-        run: echo "TEST=Hello" >> $GITHUB_ENV
-
-      - name: Test
-        run: echo $MODELS
-
-      - name: Test2
-        run: echo $TEST
+      - name: test
+        run: echo $GIT_DIFF
 
