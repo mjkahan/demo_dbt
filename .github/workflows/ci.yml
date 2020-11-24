@@ -19,7 +19,9 @@ jobs:
       - name: Identify Models
         id: model_names
         run: |
-          "MODELS=$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')" >> $GITHUB_ENV
-        
+          echo this is the model: $MODELS
+        env:
+          MODELS: test_model_name
+
       - name: Deploy Models
         run: echo $MODELS
