@@ -21,7 +21,7 @@ jobs:
         run: |
           echo this is the model: $MODELS
         env:
-          MODELS: $(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')
+          MODELS: echo "$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g'):"
 
       - name: Deploy Models
         run: echo $MODELS
