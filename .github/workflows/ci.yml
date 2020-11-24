@@ -19,7 +19,7 @@ jobs:
       - name: Identify Models
         id: model_names
         run: |
-          echo "set-output name=models::$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')"
+          "MODELS=$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')" >> $GITHUB_ENV
         
       - name: Deploy Models
-        run: echo ${{ steps.model_names.outputs.models }};
+        run: echo $MODELS
