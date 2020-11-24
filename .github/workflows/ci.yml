@@ -13,12 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: dbt-run
-        uses: mwhitaker/dbt-action@master
-        with:
-          dbt_command: "dbt run"
+      - name: Checkout Branch
+        uses: actions/checkout@v2
 
       - name: Run a one-line script
         run: Complete
