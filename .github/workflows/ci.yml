@@ -1,0 +1,25 @@
+# CI Workflow for DBT
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+
+      - name: dbt-action
+        uses: mwhitaker/dbt-actions@master
+        with:
+          dbt_command: "dbt run --profiles-dir ."
+        env:
+          DBT_USER: ${{ secrets.DBT_USER }}
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
