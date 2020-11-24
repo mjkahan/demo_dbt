@@ -16,12 +16,10 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v2
 
-      - name: Identify Models
-        id: model_names
-        run: |
-          echo this is the model: $MODELS
-        env:
-          MODELS: echo "$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g'):"
+      - name: Set env
+        run: echo "MODELS=$(echo git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed 's/\.sql$/+/g')" >> $GITHUB_ENV
 
-      - name: Deploy Models
+      - name: Test
         run: echo $MODELS
+
+
