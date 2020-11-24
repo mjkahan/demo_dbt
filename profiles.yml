@@ -1,0 +1,14 @@
+# profiles.yml
+snowflake:
+  outputs:
+    dev:
+      type: snowflake
+      account: ${{ secrets.DBT_ACCOUNT }}
+      database: DEMO_DB
+      schema: PUBLIC
+      warehouse: compute_wh
+      role: SYSADMIN
+      user: ${{ secrets.DBT_USER }}
+      password: ${{ secrets.DBT_PASSWORD }}
+      threads: 1
+  target: dev
