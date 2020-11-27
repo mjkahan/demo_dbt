@@ -20,5 +20,5 @@ clean-targets:
 models:
   demo_dbt:
       staging:
-          +materialized: view
+          +materialized: table
           +schema: staging
