@@ -4,8 +4,14 @@ with source_data as (
     union all
     select null as id
 
+),
+
+final as (
+
+    select *
+    from source_data
+    where id is not null
+
 )
 
-select *
-from source_data
-where id is not null
+select * from final
