@@ -13,8 +13,8 @@ final as (
 
     select
         teams.team,
-        team_locations.city,
-        team_locations.state
+        trim(team_locations.city) as city,
+        trim(team_locations.state) as state
 
     from teams
 

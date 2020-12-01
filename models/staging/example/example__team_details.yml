@@ -1,0 +1,17 @@
+
+version: 2
+
+models:
+    - name: example__team_details
+      description: >
+        A list of a few NBA teams that made the Playoffs in 2020.
+
+      columns:
+        - name: Team
+          description: "The name of the team."
+
+        - name: City
+          description: "The home city of the team."
+
+        - name: State
+          description: "The home state of the team."           
