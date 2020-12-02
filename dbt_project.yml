@@ -3,6 +3,10 @@ name: 'demo_dbt'
 version: '1.0.0'
 config-version: 2
 
+vars:
+    current_champion: Lakers
+
+
 profile: 'snowflake'
 
 source-paths: ["models"]

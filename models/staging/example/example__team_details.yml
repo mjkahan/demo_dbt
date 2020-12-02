@@ -9,9 +9,13 @@ models:
       columns:
         - name: Team
           description: "The name of the team."
+          tests:
+            - not_null
 
         - name: City
           description: "The home city of the team."
+          tests:
+            - is_la_team
 
         - name: State
           description: "The home state of the team."           
