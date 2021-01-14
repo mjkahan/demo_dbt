@@ -21,7 +21,12 @@ clean-targets:
     - "target"
     - "dbt_modules"
 
+on-run-start: "{{ insert_audits('run_start') }}"
+on-run-end: "{{ insert_audits('run_end') }}"
+
 models:
+  pre-hook: "{{ insert_audits('model_start') }}"
+  post-hook: "{{ insert_audits('model_end') }}"
   demo_dbt:
       staging:
           +materialized: table
