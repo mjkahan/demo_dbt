@@ -1,8 +1,7 @@
-
 version: 2
 
 models:
-    - name: example__team_details
+    - name: dim_team_details
       description: >
         A list of a few NBA teams that made the Playoffs in 2020.
 
@@ -18,4 +17,4 @@ models:
             - is_la_team
 
         - name: State
-          description: '{{ doc("team_details_state") }}'          
+          description: '{{ doc("team_details_state") }}'

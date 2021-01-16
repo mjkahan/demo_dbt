@@ -3,11 +3,11 @@ version: 2
 
 models:
     - name: example__my_first_dbt_model
-      description: "A starter dbt model"
+      description: '{{ doc("table_events") }}'
       columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
+        - name: id
+          description: "The primary key for this table"
+          tests:
                 - unique
                 - not_null
 
