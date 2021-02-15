@@ -43,3 +43,9 @@ jobs:
       - name: Test logic (False)
         if: steps.count_models.outputs.model_count == 0
         run: echo "No Files!"
+
+      - name: dbt-run
+        uses: mwhitaker/dbt-action@master
+        if: steps.count_models.outputs.model_count > 0
+        with:
+          dbt_command: "dbt run --profiles-dir . --exclude sample_data__store_sales"
