@@ -13,12 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v0.1.0
+      - uses: actions/checkout@v2
 
-      - name: dbt-run
-        uses: mwhitaker/dbt-action@master
-        with:
-          dbt_command: "dbt run --profiles-dir ."
+#      - name: dbt-run
+#        uses: mwhitaker/dbt-action@master
+#        with:
+#          dbt_command: "dbt run --profiles-dir ."
 
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
+          
       - name: Run a one-line script
         run: Complete
