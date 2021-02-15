@@ -15,8 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - id: changed_files
+      - id: files
         uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
       
       - id: count_models
         run: |
