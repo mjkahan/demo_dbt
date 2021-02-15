@@ -21,14 +21,16 @@ jobs:
       - id: count_models
         run: |
           cnt_models_changed=0
-          for file in "${{ steps.files.outputs.added_modified }}"; do
+          for file in ${{ steps.files.outputs.all }}; do
             if [[ $file == "models/"* ]] && [[ $file != "models/docs"* ]]; then
               echo $file
               let "cnt_models_changed+=1"
+            else
+              echo $file
             fi
           done
           echo $cnt_models_changed
-          echo "::set-output name=action_fruit::$cnt_models_changed"       
+          echo "::set-output name=model_count::$cnt_models_changed"       
 
       - name: test logic 
-        run: echo "${{ steps.count_models.outputs.action_fruit  }}"
+        run: echo "${{ steps.count_models.outputs.model_count  }}"
