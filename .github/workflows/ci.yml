@@ -26,7 +26,7 @@ jobs:
 
       - name: dbt-run
         if: >
-          [[ "${{ steps.files.outputs.all }} == "models/"*  ]] &&
+          [[ "${{ steps.files.outputs.all }} == "nope/"*  ]] &&
           [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
         uses: mwhitaker/dbt-action@master
         with:
