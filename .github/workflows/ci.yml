@@ -41,5 +41,5 @@ jobs:
         run: echo "There were ${{ steps.count_models.outputs.model_count  }} models touched"
 
       - name: Test logic (False)
-        if: steps.count_models.outputs.model_count = 0
+        if: steps.count_models.outputs.model_count == 0
         run: echo "No Files!"
