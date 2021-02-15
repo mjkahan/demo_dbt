@@ -22,7 +22,7 @@ jobs:
         if: >
           [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] &&
           [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]];
-      - run: |
+        run: |
           for changed_file in ${{ steps.files.outputs.added_modified }}; do
             if [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] && [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]]; then
               echo "${changed_file} this file passes"
