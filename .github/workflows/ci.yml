@@ -23,9 +23,13 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
+          count=0
           for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "Do something with this ${changed_file}."
+            if  [ "${changed_file}" == "models/"* ] &&  [ "${changed_file}" != "models/docs/*" ]; then
+            ${count}=+1
+            fi
           done
+          echo $count
           
       - name: Run a one-line script
         run: Complete
