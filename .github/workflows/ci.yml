@@ -26,12 +26,7 @@ jobs:
               let "cnt_models_changed+=1"
             fi
           done
-          echo "::set-output name=model_count::5"        
+          echo "::set-output name=action_fruit::strawberry"       
 
-      - name: test logic true
-        if: ${{ steps.count_models.outputs.model_count  }} > 0
-        run: echo "More than 1 valid model detected"
-
-      - name: test logic false
-        if: ${{ steps.count_models.outputs.model_count  }} = 0
-        run: echo "No valid models detected"
+      - name: test logic 
+        run: echo "${{ steps.count_models.outputs.action_fruit  }}"
