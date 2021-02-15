@@ -15,20 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      - name: dbt-run
-#        uses: mwhitaker/dbt-action@master
-#        with:
-#          dbt_command: "dbt run --profiles-dir ."
-
       - id: changed_files
         uses: jitterbit/get-changed-files@v1
 
-      - name: dbt run
-        run: echo "it worked"
+#      - name: dbt run
+#        run: echo "it worked"
+#        if: >
+#          [[ "${{ steps.files.outputs.all }} == "models/"*  ]] &&
+#          [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
+
+      - name: dbt-run
         if: >
           [[ "${{ steps.files.outputs.all }} == "models/"*  ]] &&
           [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
-        
-          
-      - name: Run a one-line script
-        run: Complete
+        uses: mwhitaker/dbt-action@master
+        with:
+          dbt_command: "dbt run --exclude sample_data__store_sales --profiles-dir ."
