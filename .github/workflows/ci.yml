@@ -20,6 +20,12 @@ jobs:
 
       - name: test logic
         if: >
-          [[ "${{ steps.files.outputs.added_modified  }} == "nope/"*  ]] &&
+          [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] &&
           [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]];
-        run: echo "This should not run"
+      - run: |
+          for changed_file in ${{ steps.files.outputs.added_modified }}; do
+            if [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] && [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]]; then
+              echo "${changed_file} this file passes"
+            else
+              echo "${changed_file} this file does NOT pass"
+          done
