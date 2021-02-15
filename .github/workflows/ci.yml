@@ -26,7 +26,7 @@ jobs:
               let "cnt_models_changed+=1"
             fi
           done
-          echo "::set-output name=action_fruit::strawberry"       
+          echo "::set-output name=action_fruit::$cnt_models_changed"       
 
       - name: test logic 
         run: echo "${{ steps.count_models.outputs.action_fruit  }}"
