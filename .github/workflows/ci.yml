@@ -17,15 +17,21 @@ jobs:
 
       - id: changed_files
         uses: jitterbit/get-changed-files@v1
-
-      - name: test logic
-        if: >
-          [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] &&
-          [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]];
+      
+      - id: count_models
         run: |
-          for changed_file in ${{ steps.files.outputs.added_modified }}; do
-            if [[ "${{ steps.files.outputs.added_modified  }} == "models/"*  ]] && [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]]; then
-              echo "${changed_file} this file passes"
-            else
-              echo "${changed_file} this file does NOT pass"
+          cnt_models_changed=0
+          for file in ${{ steps.files.outputs.added_modified }}; do
+            if [[ $file == "models/"* ]] && [[ $file != "models/docs"* ]]; then
+              let "cnt_models_changed+=1"
+            fi
           done
+          echo "::set-output name=model_count::$cnt_models_changed"        
+
+      - name: test logic true
+        if: ${{ steps.count_models.outputs.model_count  }}>0
+        run: echo "More than 1 valid model detected"
+
+      - name: test logic false
+        if: ${{ steps.count_models.outputs.model_count  }}=0
+        run: echo "No valid models detected"
