@@ -44,8 +44,9 @@ jobs:
         if: steps.count_models.outputs.model_count == 0
         run: echo "No Files!"
 
-      - name: dbt-run
-        uses: mwhitaker/dbt-action@master
+
+      - name: Install Python
         if: steps.count_models.outputs.model_count > 0
+        uses: actions/setup-python@v2
         with:
-          dbt_command: "dbt run --profiles-dir . --exclude sample_data__store_sales"
+          python-version: '3.8.x'
