@@ -20,6 +20,8 @@ jobs:
       
       - id: count_models
         run: |
+          echo ${{ steps.files.outputs.all }}
+          echo "${{ steps.files.outputs.all }}"
           cnt_models_changed=0
           for file in ${{ steps.files.outputs.all }}; do
             if [[ $file == "models/"* ]] && [[ $file != "models/docs"* ]]; then
