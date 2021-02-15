@@ -18,16 +18,8 @@ jobs:
       - id: changed_files
         uses: jitterbit/get-changed-files@v1
 
-#      - name: dbt run
-#        run: echo "it worked"
-#        if: >
-#          [[ "${{ steps.files.outputs.all }} == "models/"*  ]] &&
-#          [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
-
-      - name: dbt-run
+      - name: test logic
         if: >
-          [[ "${{ steps.files.outputs.all }} == "nope/"*  ]] &&
-          [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
-        uses: mwhitaker/dbt-action@master
-        with:
-          dbt_command: "dbt run --exclude sample_data__store_sales --profiles-dir ."
+          [[ "${{ steps.files.outputs.added_modified  }} == "nope/"*  ]] &&
+          [[ "${{ steps.files.outputs.added_modified  }}" != "models/docs"* ]];
+        run: echo "This should not run"
