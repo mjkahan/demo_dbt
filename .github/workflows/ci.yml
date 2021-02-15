@@ -20,16 +20,15 @@ jobs:
 #        with:
 #          dbt_command: "dbt run --profiles-dir ."
 
-      - id: files
+      - id: changed_files
         uses: jitterbit/get-changed-files@v1
-      - run: |
-          count=0
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            if  [ "${changed_file}" == "models/"* ] &&  [ "${changed_file}" != "models/docs/*" ]; then
-            ${count}=+1
-            fi
-          done
-          echo $count
+
+      - name: dbt run
+        run: echo "it worked"
+        if: >
+          [[ "${{ steps.files.outputs.all }} == "models/"*  ]] &&
+          [[ "${{ steps.files.outputs.all }}" != "models/docs"* ]];
+        
           
       - name: Run a one-line script
         run: Complete
