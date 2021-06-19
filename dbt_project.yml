@@ -22,3 +22,7 @@ models:
       staging:
           +materialized: table
           +schema: staging
+          example:
+            +tags:
+                - p1
+                - another_tag
