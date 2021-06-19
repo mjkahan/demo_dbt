@@ -1,7 +1,3 @@
-{{ config(
-    query_tag = 'demo_dbt_tag'
-) }}
-
 with teams as (
 
     select
