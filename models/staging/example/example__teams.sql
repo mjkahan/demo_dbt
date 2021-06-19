@@ -1,3 +1,7 @@
+{{ config(
+    query_tag = 'demo_dbt_tag'
+) }}
+
 with teams as (
 
     select
@@ -17,6 +21,11 @@ with teams as (
 
     select
         'Heat' as team
+
+    union all
+
+    select
+        'Bulls' as team
 
 )
 

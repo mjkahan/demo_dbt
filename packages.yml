@@ -1,0 +1,3 @@
+packages:
+  - git: "https://github.com/mjkahan/dbt_music_data.git" # git URL
+    revision: add_macro # tag or branch name
