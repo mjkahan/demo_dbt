@@ -13,12 +13,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v0.1.0
+      - uses: actions/checkout@v2
 
-      - name: dbt-run
-        uses: mwhitaker/dbt-action@master
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.added_modified }}; do
+            echo "Do something with this ${changed_file}."
+          done
+      
+      - id: count_models
+        name: Count model files touched
+        run: |
+          cnt_models_changed=0
+          for file in ${{ steps.files.outputs.added_modified }}; do
+            if [[ $file == "models/"* ]] && [[ $file != "models/docs"* ]]; then
+              echo $file
+              let "cnt_models_changed+=1"
+            else
+              echo $file
+            fi
+          done
+          echo "::set-output name=model_count::$cnt_models_changed"       
+
+      - name: Test logic (True)
+        if: steps.count_models.outputs.model_count > 0
+        run: echo "There were ${{ steps.count_models.outputs.model_count  }} models touched"
+
+      - name: Test logic (False)
+        if: steps.count_models.outputs.model_count == 0
+        run: echo "No Files!"
+
+
+      - name: Install Python
+        if: steps.count_models.outputs.model_count > 0
+        uses: actions/setup-python@v2
         with:
-          dbt_command: "dbt run --profiles-dir ."
-
-      - name: Run a one-line script
-        run: Complete
+          python-version: '3.8.x'
