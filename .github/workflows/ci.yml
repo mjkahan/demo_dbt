@@ -13,12 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v0.1.0
+      - name: Checkout Branch
+        uses: actions/checkout@v2
 
-      - name: dbt-run
-        uses: mwhitaker/dbt-action@master
+      - uses: technote-space/get-diff-action@v4
         with:
-          dbt_command: "dbt run --profiles-dir ."
+          PATTERNS: |
+            +*.sql+
 
-      - name: Run a one-line script
-        run: Complete
+      - name: test
+        run: echo $GIT_DIFF
+
